@@ -31,3 +31,43 @@ with overheads_read.open (mode="r", encoding= "UTF-8") as file:
         # Use .append() function to add the amount into the empty list 'overheads_amount'  
         # Use index[1] to extract the amount in the index 1 of the 'overheads_amount' list
         overheads_amount.append(float(line[1]))
+
+        # Assign the variable 'highestvalue' and find the highest value using max() function from the amount list
+highestvalue = max(overheads_amount)
+
+# Use for loop to iterate over the range of objects. In this instance, 'information' is used as a temporary variable
+for information in overheads_cat:
+
+    # Use the 'if statement' to execute a portion of the code when certain condition(s) are met
+    # In this case, execute the function when the highest value in the 'overhead_amount' list is met
+    if information[1] == str(highestvalue):
+
+        # Assign the variable 'highest_overhead' to the information that is extracted
+        highest_overhead = information[0]
+
+# Create a filepath to "summary_report.txt" file where all our outputs would be 
+summary_path= Path.cwd()/"project_group"/"summary_report.txt"
+# Create the file using the .touch() function
+summary_path.touch()
+
+# Create a function 'overheads_function()' 
+def overheads_function():
+
+    # Include docstrings to the function using a triple-quoted string, it is used to include information of the function.
+    """
+    - Function would compare the overheads and find the highest overhead
+    - In this function there are no parameters
+    """
+
+    # Assign the variable 'output' to the highest overhead output
+    output= (f"[HIGHEST OVERHEADS] {highest_overhead}: {highestvalue}% \n")
+
+    # Use .open() function to to append to the final txt file
+    # Encoding allows us include longer or all characters and save files as file
+    with summary_path.open (mode="a", encoding= "UTF-8") as file:
+
+        # Use .write() function to write the output and indicate end of text line in the summary report
+        file.write(output)
+
+        # Use .close() function to close file and prevent issues of corrupted data
+        file.close()
