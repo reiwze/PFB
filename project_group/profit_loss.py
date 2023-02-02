@@ -38,3 +38,42 @@ summary_path = Path.cwd()/"project_group"/"summary_report.txt"
 # Create the file using the .touch() function
 summary_path.touch()
 
+# Create a function 'profitloss_difference'
+def profitloss_difference():
+
+    # Include docstrings to the function using a triple-quoted string, it is used to include information of the function.
+    """
+    - Function would calculate the difference in the amount of net profits between the day itself and the day before, from Day 40-50
+    - In this function there are no parameters
+    """
+
+    # Use 'len(profit_loss_amount)-1' to count the number of days there are, 11 days from Day 40-50 are placed inside the positions of index 0-10
+    # Using the for loop with range(0, (len_(profit_loss_amount)-1), we are looking at iterating the values of the 11 days 
+    for num in range(0,(len(profit_loss_amount)-1)):
+
+        # The amount on the first day would be assigned [num] as it is in index 0
+        first_day = profit_loss_amount[num]
+        # The amount on the second day would be assigned [num+1] as it is in index 1
+        second_day = profit_loss_amount[num+1]
+        
+        # Use the 'if statement' to execute a portion of the code when certain condition(s) are met
+        # In this case, execute the portion of the code when 'first_day' is more than 'second_day'
+        if first_day > second_day:
+
+            # Assign the variable 'difference' and find the difference between the amount of the first day and second day by subtracting it
+            difference = first_day - second_day
+            
+            # Using 'profit_loss_days[num+1][0]', we are looking at the second day used for comparision which falls under index 0 in the 'profit_loss_days' list 
+            # Assign the variable 'difference_day' to the profit deficit day
+            difference_day = profit_loss_days[num+1][0]
+
+            # Use .open() function to to append to the final txt file
+            # Encoding allows us include longer or all characters and save files as file
+            with summary_path.open (mode= 'a', encoding= 'UTF-8') as file:
+
+                # Use .write() function to write the results and indicate end of text line in the summary report
+                # use float() function to float the 'difference_day' for our results
+                file.write((f"[PROFIT DEFICIT] DAY: {float(difference_day)}, AMOUNT: USD{difference} \n"))
+                
+                # Use .close() function to close file and prevent issues of corrupted data
+                file.close()
