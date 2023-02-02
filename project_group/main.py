@@ -12,5 +12,6 @@ def main():
     # Run profitloss.difference() to write report
     profit_loss.profitloss_difference()
 
+    
 # Run main function to activate the programme
 main()
